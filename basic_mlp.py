@@ -16,14 +16,14 @@ learning_rate = 0.001
 
 # dataset
 train_dataset = torchvision.datasets.MNIST(root='./data', train=True,
-    transform=transforms.ToTensor(), download='True')
+                                           transform=transforms.ToTensor(), download='True')
 test_dataset = torchvision.datasets.MNIST(root='./data', train=False,
-    transform=transforms.ToTensor())
+                                          transform=transforms.ToTensor())
 
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
-    batch_size=batch_size, shuffle=True)
+                                           batch_size=batch_size, shuffle=True)
 test_loader = torch.utils.data.DataLoader(dataset=train_dataset,
-    batch_size=batch_size, shuffle=False)
+                                          batch_size=batch_size, shuffle=False)
 
 examples = iter(train_loader)
 samples, labels = examples.__next__()
@@ -50,7 +50,7 @@ class NeuralNet(nn.Module):
 
 # training model
 
-model = NeuralNet(input_size=input_size, hidden_size=hidden_size, num_classes=num_classes)
+model = NeuralNet(input_size=input_size, hidden_size=hidden_size, num_classes=num_classes).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
